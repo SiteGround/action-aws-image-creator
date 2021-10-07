@@ -1,0 +1,30 @@
+name: AWS EC2 AMI Snapshotter
+description: GitHub Action for creation of AMI images of running EC2 instances. Valid AWS credentials must be set up prior to executing this action.
+author: George Penkov
+inputs:
+  instance-id:
+    description: >-
+      Instance ID of the EC2 that will be used for AMI snapshot.
+    required: true
+  name:
+    description: >-
+      The name of the new AMI image snapshot. If the name already exists, it will be suffixed with UTC timestamp. 
+    required: true
+  description:
+    description: >-
+      The decription of the new AMI image snapshot.
+    required: false
+  wait-for-completion:
+    description: >-
+      Should the action wait until image is ready. Default is false
+    required: false
+outputs:
+  name:
+    description: >-
+      The name of the newly created AMI image snapshot.
+  ami-id:
+    description: >-
+      AMI id of the newly created AMI image snapshot.
+runs:
+  using: node
+  main: ./dist/index.js

@@ -1,0 +1,23 @@
+{
+    "name": "AWS EC2 AMI Snapshotter",
+    "description": "GitHub Action for creation of AMI images of running EC2 instances. Valid AWS credentials must be set up prior to executing this action.",
+    "author": "George Penkov",
+    "license": "MIT",
+    "dependencies": {
+        "@actions/core": "^1.6.0",
+        "@actions/github": "^5.0.0",
+        "@aws-sdk/client-ec2": "^3.35.0"
+    },
+    "main": "./src/index.js",
+    "scripts": {
+        "index": "node -r dotenv/config ./src/index.js",
+        "lint": "eslint ./src/*.js",
+        "package": "ncc build ./src/index.js"
+    },
+    "type": "module",
+    "devDependencies": {
+        "@vercel/ncc": "^0.31.1",
+        "dotenv": "^10.0.0",
+        "eslint": "^8.0.0"
+    }
+}
