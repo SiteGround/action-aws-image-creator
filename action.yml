@@ -26,5 +26,5 @@ outputs:
     description: >-
       AMI id of the newly created AMI image snapshot.
 runs:
-  using: node
+  using: node12
   main: ./dist/index.js
