@@ -26,5 +26,5 @@ outputs:
     description: >-
       AMI id of the newly created AMI image snapshot.
 runs:
-  using: node12
-  main: ./dist/index.js
+  using: 'docker'
+  main: 'Dockerfile'
