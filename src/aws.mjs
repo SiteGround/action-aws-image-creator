@@ -19,7 +19,8 @@ async function createImage(retryWithSuffix = false) {
     return data.ImageId;
   } catch (error) {
     if (error.Code === 'InvalidAMIName.Duplicate' && !retryWithSuffix) {
-      return await createImage(true);
+      const suffixAmiId = await createImage(true);
+      return suffixAmiId;
     }
     core.error('AWS EC2 AMI creation error');
     throw error;
