@@ -27,4 +27,4 @@ outputs:
       AMI id of the newly created AMI image snapshot.
 runs:
   using: 'docker'
-  main: 'Dockerfile'
+  image: 'Dockerfile'
