@@ -9,7 +9,7 @@ import {createImage, waitUntilImageIsReady} from './aws.mjs';
       core.setOutput('ami-id', amiId);
       core.endGroup();
       if (wait) {
-        core.startGroup("Waiting for image to be ready")
+        core.startGroup("Waiting for image " + amiId + "to be ready")
         await waitUntilImageIsReady(amiId);
         core.endGroup();
       }
