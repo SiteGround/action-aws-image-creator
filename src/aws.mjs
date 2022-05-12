@@ -45,10 +45,39 @@ async function waitUntilImageIsReady(imageId = false) {
     core.warning("Timed out waiting for image " + imageId + " to become ready!");
     return false;
   } catch (error) {
-    core.error('AWS EC2 waiting for image creation failed');
+    core.error('AWS: EC2 waiting for image creation failed');
     throw error;
   }
 }
+
+async function clearOtherImages(namePrefix, keepImageId)
+{
+  try {
+    const client = new EC2({apiVersion: '2016-11-15'});
+    const data = await client.describeImages({Owners: ['self']});
+
+    if (data.Images === undefined || data.Images.length === 0) {
+      return true;
+    }
+
+    const re = new RegExp('^' + namePrefix + '_(\\d+)$', "g");
+    data.Images.map((image) => {
+      if (image.Name.match(re) || image.Name === namePrefix) {
+        if (image.ImageId !== keepImageId) {
+          core.info("Deregistering image " + image.ImageId + " " + image.Name);
+          client.deregisterImage({ImageId: image.ImageId});
+        }
+      }
+    });
+
+    return true;
+
+  } catch (error) {
+    core.error('AWS: clear of other images failed');
+    throw error;
+  }
+}
+
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -58,5 +87,6 @@ function sleep(ms) {
 
 export {
   waitUntilImageIsReady,
-  createImage
+  createImage,
+  clearOtherImages
 };

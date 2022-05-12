@@ -18,6 +18,10 @@ inputs:
     description: >-
       Should the action wait until image is ready. Default is false
     required: false
+  deregister-old-images:
+      description: >-
+      Deregister all images with the same name, and the one just created. Works only with wait-for-completion set to true. Default is false
+      required: false
 outputs:
   name:
     description: >-
