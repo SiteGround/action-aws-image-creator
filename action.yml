@@ -12,16 +12,16 @@ inputs:
     required: true
   description:
     description: >-
-      The decription of the new AMI image snapshot.
+      The description of the new AMI image snapshot.
     required: false
   wait-for-completion:
     description: >-
       Should the action wait until image is ready. Default is false
     required: false
   deregister-old-images:
-      description: >-
+    description: >-
       Deregister all images with the same name, and the one just created. Works only with wait-for-completion set to true. Default is false
-      required: false
+    required: false
 outputs:
   name:
     description: >-
